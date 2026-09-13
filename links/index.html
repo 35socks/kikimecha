@@ -88,9 +88,24 @@
   .link-row:hover .idx,
   .link-row:hover .arrow{ color:var(--bg); }
 
+  .shows-block{
+    margin-top:56px;
+  }
+  .shows-block .prompt-line{ margin-bottom:10px; }
+  .shows-block h2{
+    font-size:1.4rem; margin:0 0 20px; font-weight:700; letter-spacing:-0.01em;
+  }
+  .shows-block h2 .brk{ color:var(--green-dim); }
+  .bit-frame{
+    border:1px solid var(--green-faint);
+    padding:18px;
+  }
+  /* the Bandsintown widget renders its own light UI - this frame keeps it
+     from feeling like a foreign block dropped onto the terminal page */
+
   footer{
     position:relative; z-index:2; padding:0 32px 60px;
-    max-width:560px; margin:0 auto;
+    max-width:560px; margin:56px auto 0;
     font-size:0.8rem; color:var(--green-dim);
   }
 
@@ -149,10 +164,22 @@
         <span class="arrow">-&gt;</span>
       </a>
     </div>
+
+    <div class="shows-block">
+      <div class="prompt-line">~/kikimecha $ ./shows --upcoming<span class="cursor"></span></div>
+      <h2>shows<span class="brk">_</span></h2>
+      <div class="bit-frame">
+        <a class="bit-widget-initializer"
+          data-artist-name="id_15665226"
+          data-app-id="76dcfdc99f18ea13223c471413e4c372"
+        ></a>
+      </div>
+    </div>
   </main>
 
   <footer>kikimecha</footer>
 
+<script charset="utf-8" src="https://widgetv3.bandsintown.com/main.min.js"></script>
 <script>
   const chars = ['[',']','(',')','{','}','./','\\\\','[]','()','{}','/>','<-'];
   const field = document.getElementById('glyphField');
