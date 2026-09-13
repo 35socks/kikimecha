@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>kikimecha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0d0a;
+    --green:#39ff88;
+    --green-dim:#1c8a4e;
+    --green-faint:#0f3d24;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--green);
+    font-family:'JetBrains Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+    overflow-x:hidden;
+  }
+  a{ color:inherit; }
+
+  /* cute lil glyphs */
+  .glyphs{
+    position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+  }
+  .glyph{
+    position:absolute;
+    color:var(--green-faint);
+    font-size:1.4rem;
+    user-select:none;
+  }
+
+  nav{
+    position:relative; z-index:2;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:24px 32px;
+    border-bottom:1px solid var(--green-faint);
+    font-size:0.85rem;
+  }
+  nav .brand{ color:var(--green); font-weight:700; letter-spacing:0.02em; }
+  nav .links{ display:flex; gap:24px; }
+  nav .links a{ text-decoration:none; color:var(--green-dim); transition:color 0.15s ease; }
+  nav .links a:hover{ color:var(--green); }
+
+  header.hero{
+    position:relative; z-index:2;
+    min-height:82vh; display:flex; flex-direction:column; justify-content:center;
+    padding:40px 32px; max-width:900px; margin:0 auto;
+  }
+  .prompt-line{
+    color:var(--green-dim); font-size:0.95rem; margin-bottom:14px;
+  }
+  .prompt-line .cursor{
+    display:inline-block; width:9px; height:1.1em; background:var(--green);
+    margin-left:4px; vertical-align:text-bottom;
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  h1{
+    font-size:clamp(2.6rem, 8vw, 5.2rem);
+    margin:0; font-weight:700; letter-spacing:-0.01em;
+    text-shadow: 0 0 18px rgba(57,255,136,0.35);
+  }
+  h1 .brk{ color:var(--green-dim); }
+
+  .tagline{
+    margin-top:18px; font-size:1.05rem; color:var(--green-dim);
+    max-width:52ch; line-height:1.6;
+  }
+
+  .hero-links{
+    margin-top:36px; display:flex; gap:14px; flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-block; padding:12px 20px; border:1px solid var(--green-dim);
+    color:var(--green); text-decoration:none; font-size:0.9rem;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .btn:hover{ background:var(--green); color:var(--bg); border-color:var(--green); }
+
+  section{
+    position:relative; z-index:2; max-width:900px; margin:0 auto;
+    padding:60px 32px; border-top:1px solid var(--green-faint);
+  }
+  section h2{
+    font-size:1.1rem; font-weight:700; margin:0 0 20px;
+    color:var(--green);
+  }
+  section h2 .brk{ color:var(--green-dim); font-weight:400; }
+
+  .about p{
+    line-height:1.75; font-size:0.98rem; color:#cdeedd; max-width:64ch;
+    margin:0 0 14px;
+  }
+  .about p .brk{ color:var(--green-dim); }
+
+  footer{
+    position:relative; z-index:2; padding:40px 32px 60px;
+    max-width:900px; margin:0 auto; border-top:1px solid var(--green-faint);
+    display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px;
+    font-size:0.85rem; color:var(--green-dim);
+  }
+  footer .links{ display:flex; gap:20px; }
+  footer .links a{ text-decoration:none; color:var(--green-dim); }
+  footer .links a:hover{ color:var(--green); }
+
+  :focus-visible{ outline:2px solid var(--green); outline-offset:2px; }
+
+  @media (prefers-reduced-motion: reduce){
+    .cursor{ animation:none; opacity:1; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="glyphs" id="glyphField" aria-hidden="true"></div>
+
+  <nav>
+    <span class="brand">kikimecha</span>
+    <div class="links">
+      <a href="#about">about</a>
+      <a href="#contact">contact</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="prompt-line">~/kikimecha $ whoami<span class="cursor"></span></div>
+    <h1>kikimecha<span class="brk">_</span></h1>
+    <p class="tagline">hi...</p>
+    <div class="hero-links">
+      <a href="#about" class="btn">./about</a>
+      <a href="#contact" class="btn">./contact</a>
+    </div>
+  </header>
+
+  <!-- section id="about" class="about">
+    <h2><span class="brk">//</span> about</h2>
+    <p><span class="brk">[01]</span> noin</p>
+    <p><span class="brk">[02]</span> tracks start as feedback loops and get compiled down into something you can actually listen to.</p>
+    <p><span class="brk">[03]</span> releases aren't up yet — check back soon.</p>
+  </section> -->
+
+  <footer id="contact">
+    <div>kikimecha</div>
+    <div class="links">
+      <a href="https://instagram.com/kikimecha">instagram</a>
+      <a href="https://kikimecha.bandcamp.com">bandcamp</a>
+      <a href="mailto:kikimecha@proton.me">email</a>
+    </div>
+  </footer>
+
+<script>
+  const chars = ['[',']','(',')','{','}','./','\\\\','[]','()','{}','/>','<-'];
+  const field = document.getElementById('glyphField');
+  const count = window.innerWidth < 700 ? 18 : 34;
+  for (let i = 0; i < count; i++) {
+    const g = document.createElement('div');
+    g.className = 'glyph';
+    g.textContent = chars[Math.floor(Math.random() * chars.length)];
+    g.style.left = Math.random() * 100 + 'vw';
+    g.style.top = Math.random() * 100 + 'vh';
+    g.style.fontSize = (0.9 + Math.random() * 1.4) + 'rem';
+    g.style.opacity = (0.25 + Math.random() * 0.5).toFixed(2);
+    field.appendChild(g);
+  }
+</script>
+
+</body>
+</html>
