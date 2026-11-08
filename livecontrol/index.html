@@ -3,146 +3,298 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LiveControl — Control Ableton Live from your phone</title>
-  <meta name="description" content="LiveControl is a free, open source app that turns any phone, tablet or laptop on your Wi-Fi into a setlist remote for Ableton Live.">
-  <meta name="theme-color" content="#0a0a0a">
+  <title>LiveControl – Control Ableton Live from your phone</title>
+  <meta name="description" content="LiveControl is a free, open source Mac app that turns any phone, tablet or laptop on your Wi-Fi into a setlist remote for Ableton Live.">
+  <meta name="theme-color" content="#E7EAEE">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="LiveControl – Control Ableton Live from your phone">
+  <meta property="og:description" content="A free, open source setlist remote for Ableton Live. Jump songs, loop sections and mute tracks from any device on your Wi-Fi.">
+  <meta name="twitter:card" content="summary">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "LiveControl",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "macOS 13 or later",
+    "softwareVersion": "2.1.3",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "downloadUrl": "https://github.com/35socks/LiveControl/releases/download/V2.1.3/LiveControl-V2.1.3.zip",
+    "description": "A setlist remote for Ableton Live that runs on your local network."
+  }
+  </script>
 </head>
 <body>
 
-<header class="nav">
-  <div class="wrap nav-inner">
-    <a class="brand" href="#top"><img src="assets/icon.png" alt="" width="28" height="28"> LiveControl</a>
-    <nav class="nav-links">
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-prev" viewBox="0 0 24 24"><path d="M6 5h2v14H6zM20 5.5v13a.5.5 0 0 1-.8.4L10.5 12.4a.5.5 0 0 1 0-.8l8.7-6.5a.5.5 0 0 1 .8.4z"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M16 5h2v14h-2zM4 5.5v13a.5.5 0 0 0 .8.4l8.7-6.5a.5.5 0 0 0 0-.8L4.8 5.1a.5.5 0 0 0-.8.4z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.6v14.8a.6.6 0 0 0 .9.5l11.6-7.4a.6.6 0 0 0 0-1L7.9 4.1a.6.6 0 0 0-.9.5z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M6.5 4.5h4v15h-4zM13.5 4.5h4v15h-4z"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/></symbol>
+  <symbol id="i-loop" viewBox="0 0 24 24"><path d="M7 7h9.2l-1.6-1.6L16 4l4 4-4 4-1.4-1.4L16.2 9H7a2 2 0 0 0-2 2v1H3v-1a4 4 0 0 1 4-4zm10 10H7.8l1.6 1.6L8 20l-4-4 4-4 1.4 1.4L7.8 15H17a2 2 0 0 0 2-2v-1h2v1a4 4 0 0 1-4 4z"/></symbol>
+</svg>
+
+<header class="bar" id="bar">
+  <div class="bar-in">
+    <a class="brand" href="#top"><img src="assets/icon.png" alt="" width="30" height="30">LiveControl</a>
+    <nav class="bar-links" aria-label="Page sections">
+      <a href="#cues">Cue names</a>
       <a href="#features">Features</a>
       <a href="#how">How it works</a>
       <a href="#setup">Setup</a>
-      <a href="#faq">FAQ</a>
+      <a href="#faq">Questions</a>
     </nav>
-    <a class="btn btn-small" href="#download">Download</a>
+    <a class="btn btn-sm" href="https://github.com/35socks/LiveControl/releases/download/V2.1.3/LiveControl-V2.1.3.zip" data-download>Download</a>
   </div>
+  <div class="playhead" aria-hidden="true"><i></i></div>
 </header>
 
-<main id="top">
+<main id="main">
 
   <!-- Hero -->
-  <section class="hero wrap">
-    <div class="hero-copy">
-      <p class="eyebrow"><span class="dot"></span> Free &amp; open source</p>
-      <h1>Your setlist,<br>in your hand.</h1>
-      <p class="lead">LiveControl turns any phone, tablet or laptop on your Wi-Fi into a remote for Ableton Live. Jump songs, loop sections and see what's playing — without touching the mouse.</p>
-      <div class="cta">
-        <a class="btn" href="#download">Download for Mac</a>
-        <a class="btn btn-ghost" href="#how">See how it works</a>
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="hero-in">
+      <div class="hero-copy">
+        <h1 id="hero-title">Control Ableton Live from your phone.</h1>
+        <p class="lead">LiveControl turns any phone, tablet or laptop on your Wi-Fi into a setlist remote. Jump to a song, loop a section, mute a track, and keep your hands off the laptop.</p>
+        <div class="cta">
+          <a class="btn btn-lg" href="https://github.com/35socks/LiveControl/releases/download/V2.1.3/LiveControl-V2.1.3.zip" data-download>Download for Mac</a>
+          <a class="textlink" href="#setup">See how setup works</a>
+        </div>
+        <p class="fine"><span data-version>Version 2.1.3</span><span data-size></span>. Free and open source. Needs macOS 13 or later and Ableton Live. No account, no cloud.</p>
+        <div class="notmac" data-not-mac hidden>
+          <p data-not-mac-text></p>
+          <button class="btn btn-ghost btn-sm" type="button" data-copy-link>Copy download link</button>
+        </div>
       </div>
-      <p class="fine">macOS 13+ · Ableton Live · No account, no cloud</p>
-    </div>
 
-    <!-- Illustrative UI mock (pure CSS) -->
-    <div class="device" aria-hidden="true">
-      <div class="device-top">
-        <span class="mini-title">Friday Set</span>
-        <span class="pill"><i></i> Connected</span>
+      <div class="hero-demo">
+        <div class="demo" id="demo" aria-label="Interactive LiveControl demo">
+          <p class="demo-fallback">Turn on JavaScript to try the demo.</p>
+        </div>
+        <p class="demo-note">This is a working demo, not a screenshot. Tap songs, sections and tabs.</p>
       </div>
-      <div class="progress"><span></span></div>
-      <ul class="songs">
-        <li class="song"><b class="sw" style="--c:#3b82f6"></b><span>Opening</span><em>01</em></li>
-        <li class="song now"><b class="sw" style="--c:#4ade80"></b><span>Midnight Drive</span><em>02</em>
-          <ol class="sections"><li>Intro</li><li class="on">Verse 1 <small>LOOP</small></li><li>Chorus</li></ol>
-        </li>
-        <li class="song"><b class="sw" style="--c:#f97316"></b><span>Afterglow</span><em>03</em></li>
-        <li class="song"><b class="sw" style="--c:#eab308"></b><span>Static</span><em>04</em></li>
-      </ul>
-      <div class="transport"><button>⏮</button><button class="play">▶</button><button>■</button><button>⏭</button></div>
+    </div>
+  </section>
+
+  <!-- Cue names -->
+  <section class="block" id="cues" aria-labelledby="cues-title">
+    <div class="in">
+      <div class="block-head">
+        <h2 id="cues-title">Your locators are the setlist.</h2>
+        <p class="sec-lead">Name cues in Live and LiveControl builds the list for you. Two small tags change how a cue behaves.</p>
+      </div>
+
+      <figure class="cues">
+        <div class="cues-scroll" role="img" aria-label="An Ableton timeline with five named cues: Opening, Midnight Drive, Afterglow [STOP], Static and Outro +LOOP.">
+          <div class="ruler" aria-hidden="true">
+            <span class="flag" style="--x:1%;--c:var(--blue)"><b>Opening</b></span>
+            <span class="flag" style="--x:19%;--c:var(--green)"><b>Midnight Drive</b></span>
+            <span class="flag" style="--x:44%;--c:var(--orange)"><b>Afterglow <span class="tag">[STOP]</span></b></span>
+            <span class="flag" style="--x:68%;--c:var(--yellow)"><b>Static</b></span>
+            <span class="flag" style="--x:84%;--c:var(--yellow)"><b>Outro <span class="tag">+LOOP</span></b></span>
+          </div>
+        </div>
+        <figcaption>Cues as they would appear on the timeline in Live.</figcaption>
+      </figure>
+
+      <dl class="rules">
+        <div>
+          <dt>Midnight Drive</dt>
+          <dd>Name a cue, get a song. Songs appear in the order they sit on the timeline, and you can reorder them from any device.</dd>
+        </div>
+        <div>
+          <dt>Outro <span class="tag">+LOOP</span></dt>
+          <dd>Loops that cue until you move on. LiveControl sets Ableton's own loop brackets, so Live stays in charge of the audio.</dd>
+        </div>
+        <div>
+          <dt>Afterglow <span class="tag">[STOP]</span></dt>
+          <dd>Ends the song and parks the playhead on the next one, ready for Play.</dd>
+        </div>
+      </dl>
     </div>
   </section>
 
   <!-- Features -->
-  <section id="features" class="section wrap">
-    <h2>Built for the stage, not the studio.</h2>
-    <p class="section-lead">Everything runs on your own network. Add locators in Live, and LiveControl does the rest.</p>
-    <div class="grid">
-      <article class="card"><span class="ico">♪</span><h3>Setlist from cue points</h3><p>Your Ableton locators become a setlist automatically. Name a cue, get a song.</p></article>
-      <article class="card"><span class="ico">⇢</span><h3>Jump anywhere</h3><p>Tap any song to jump to it. Expand a song to hit its individual sections.</p></article>
-      <article class="card"><span class="ico">↻</span><h3>Section loops</h3><p>Loop with one tap, or add <code>+LOOP</code> to a cue. LiveControl sets Ableton's own loop brackets.</p></article>
-      <article class="card"><span class="ico">■</span><h3>Song end markers</h3><p>Add <code>[STOP]</code> to end a song and park the playhead on the next one, ready for Play.</p></article>
-      <article class="card"><span class="ico">◉</span><h3>Performance mode</h3><p>A big, readable now-playing view for a second device on stage.</p></article>
-      <article class="card"><span class="ico">✎</span><h3>Colours &amp; notes</h3><p>Colour-code songs and keep chords, cues and reminders right on the setlist.</p></article>
-      <article class="card"><span class="ico">⇅</span><h3>Drag to reorder</h3><p>Rearrange songs with mouse or touch. Your order survives reloads.</p></article>
-      <article class="card"><span class="ico">⌁</span><h3>Mute &amp; solo</h3><p>Control any track from the Tracks tab, plus keyboard shortcuts on desktop.</p></article>
-      <article class="card"><span class="ico">▣</span><h3>QR in one click</h3><p>Click the LC icon in the menu bar, scan the code, and you're connected.</p></article>
+  <section class="block" id="features" aria-labelledby="features-title">
+    <div class="in">
+      <div class="block-head">
+        <h2 id="features-title">Built for the stage, not the studio.</h2>
+        <p class="sec-lead">Everything runs on your own network. There is nothing to install on the devices you use as remotes.</p>
+      </div>
+
+      <div class="featgroups">
+        <div class="featgroup" style="--c:var(--blue)">
+          <h3>Playing the set</h3>
+          <dl>
+            <div><dt>Jump anywhere</dt><dd>Tap a song to jump to it. Expand it to reach its sections, or loop one with a single tap.</dd></div>
+            <div><dt>Performance mode</dt><dd>A big, readable now-playing view for a second device on stage.</dd></div>
+            <div><dt>Mute and solo</dt><dd>Control any track from the Tracks tab. Desktop browsers also get keyboard shortcuts.</dd></div>
+          </dl>
+        </div>
+        <div class="featgroup" style="--c:var(--orange)">
+          <h3>Making it yours</h3>
+          <dl>
+            <div><dt>Colours and notes</dt><dd>Colour-code songs and keep chords, cues and reminders right on the setlist.</dd></div>
+            <div><dt>Drag to reorder</dt><dd>Rearrange songs with a mouse or your finger. Your order survives reloads.</dd></div>
+            <div><dt>Connect with a QR code</dt><dd>Click the LC icon in the menu bar, scan the code, and you're connected.</dd></div>
+          </dl>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- How it works -->
-  <section id="how" class="section wrap">
-    <h2>Up and running in three steps.</h2>
-    <ol class="steps">
-      <li><span class="num">1</span><div><h3>Open LiveControl</h3><p>It lives in your menu bar as a small <b class="lc">LC</b> and starts its own Ableton bridge. No Terminal, no Node.js to install.</p></div></li>
-      <li><span class="num">2</span><div><h3>Scan the QR code</h3><p>Click the menu bar icon, then scan the code with your phone or tablet camera. Both devices just need to be on the same Wi-Fi.</p></div></li>
-      <li><span class="num">3</span><div><h3>Play your set</h3><p>Your setlist appears instantly. Tap a song, loop a section, and keep your hands off the laptop.</p></div></li>
-    </ol>
+  <section class="block" id="how" aria-labelledby="how-title">
+    <div class="in">
+      <div class="block-head">
+        <h2 id="how-title">Up and running in three steps.</h2>
+      </div>
+      <ol class="steps">
+        <li>
+          <h3>Open LiveControl</h3>
+          <p>It lives in your menu bar as a small <b class="lc">LC</b> and starts its own Ableton bridge. No Terminal, and no Node.js to install.</p>
+        </li>
+        <li>
+          <h3>Scan the QR code</h3>
+          <p>Click the menu bar icon, then point your phone or tablet camera at the code. Both devices need to be on the same Wi-Fi.</p>
+        </li>
+        <li>
+          <h3>Play your set</h3>
+          <p>Your setlist appears straight away. Tap a song, loop a section, and keep your hands off the laptop.</p>
+        </li>
+      </ol>
+    </div>
   </section>
 
   <!-- Setup -->
-  <section id="setup" class="section wrap">
-    <h2>One-time Ableton setup.</h2>
-    <p class="section-lead">LiveControl talks to Live through the AbletonJS control surface. You only do this once.</p>
-    <div class="setup-grid">
-      <div class="panel">
-        <h3>1 · Install the Remote Script</h3>
-        <p>Copy the <code>AbletonJS</code> folder into Ableton's Remote Scripts folder. It's bundled inside the app at <code>Contents/Resources/LiveControl/node_modules/ableton-js/midi-script</code>.</p>
-        <div class="code"><code id="cmd">cp -r node_modules/ableton-js/midi-script ~/Music/Ableton/User\ Library/Remote\ Scripts/AbletonJS</code><button class="copy" data-copy="#cmd">Copy</button></div>
-        <p class="small">Windows: copy the same folder to <code>Documents\Ableton\User Library\Remote Scripts\AbletonJS</code>.</p>
+  <section class="block" id="setup" aria-labelledby="setup-title">
+    <div class="in">
+      <div class="block-head">
+        <h2 id="setup-title">Set up Ableton once.</h2>
+        <p class="sec-lead">LiveControl talks to Live through the AbletonJS control surface. You only do this one time, and your progress is saved in this browser.</p>
       </div>
-      <div class="panel">
-        <h3>2 · Enable it in Live</h3>
-        <ol class="plain">
-          <li>Open Ableton Live</li>
-          <li>Go to <b>Settings → Link, Tempo &amp; MIDI</b></li>
-          <li>Under <b>Control Surface</b>, choose <b>AbletonJS</b></li>
-          <li>Leave Input and Output unassigned, then restart Live</li>
-        </ol>
+
+      <div class="setup">
+        <div class="setup-list">
+          <ol class="checks" id="checks">
+            <li>
+              <label>
+                <input type="checkbox" data-step="0">
+                <span><b>Copy AbletonJS into Live's Remote Scripts folder</b>
+                <small>Use the command on this page, or copy the folder by hand.</small></span>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" data-step="1">
+                <span><b>Open Live and go to Settings, then Link, Tempo &amp; MIDI</b></span>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" data-step="2">
+                <span><b>Under Control Surface, choose AbletonJS</b>
+                <small>Leave Input and Output unassigned.</small></span>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" data-step="3">
+                <span><b>Restart Live</b></span>
+              </label>
+            </li>
+          </ol>
+          <p class="progress" id="progress" aria-live="polite">0 of 4 done</p>
+          <button class="textbtn" type="button" id="reset-checks" hidden>Clear checklist</button>
+        </div>
+
+        <div class="setup-code">
+          <div class="tabs" role="tablist" aria-label="Operating system">
+            <button type="button" role="tab" id="tab-mac" aria-controls="panel-mac" aria-selected="true">macOS</button>
+            <button type="button" role="tab" id="tab-win" aria-controls="panel-win" aria-selected="false" tabindex="-1">Windows</button>
+          </div>
+
+          <div role="tabpanel" id="panel-mac" aria-labelledby="tab-mac" class="panel">
+            <p>The script is bundled inside the app. Run this in Terminal to copy it across:</p>
+            <div class="code">
+<pre><code id="cmd-mac">mkdir -p ~/Music/Ableton/User\ Library/Remote\ Scripts
+cp -r /Applications/LiveControl.app/Contents/Resources/LiveControl/node_modules/ableton-js/midi-script \
+  ~/Music/Ableton/User\ Library/Remote\ Scripts/AbletonJS</code></pre>
+              <button class="copy" type="button" data-copy="#cmd-mac">Copy</button>
+            </div>
+            <p class="small">This assumes LiveControl is in your Applications folder. If it's somewhere else, change the first path.</p>
+          </div>
+
+          <div role="tabpanel" id="panel-win" aria-labelledby="tab-win" class="panel" hidden>
+            <p>Copy the <code>midi-script</code> folder from <code>ableton-js</code> into Live's Remote Scripts folder and rename it <code>AbletonJS</code>. The finished path should be:</p>
+            <div class="code">
+<pre><code id="cmd-win">Documents\Ableton\User Library\Remote Scripts\AbletonJS</code></pre>
+              <button class="copy" type="button" data-copy="#cmd-win">Copy</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Download -->
-  <section id="download" class="section wrap">
-    <div class="download">
-      <img src="assets/icon.png" alt="LiveControl icon" width="96" height="96">
-      <div>
-        <h2>Get LiveControl</h2>
-        <p>Free forever. Runs entirely on your own network.</p>
+  <section class="get" id="download" aria-labelledby="get-title">
+    <div class="get-in">
+      <img src="assets/icon.png" alt="" width="96" height="96">
+      <div class="get-copy">
+        <h2 id="get-title">Get LiveControl</h2>
+        <p>Free, open source and runs entirely on your own network. <span data-version>Version 2.1.3</span><span data-size></span>.</p>
+        <div class="notmac" data-not-mac hidden>
+          <p data-not-mac-text></p>
+          <button class="btn btn-ghost btn-sm" type="button" data-copy-link>Copy download link</button>
+        </div>
       </div>
-      <!-- TODO: point this at your real download / GitHub releases URL -->
-      <a class="btn" href="https://github.com/35socks/LiveControl/releases/download/V2.1.3/LiveControl-V2.1.3.zip" download>Download for Mac</a>
+      <div class="get-actions">
+        <a class="btn btn-lg btn-ink" href="https://github.com/35socks/LiveControl/releases/download/V2.1.3/LiveControl-V2.1.3.zip" data-download>Download for Mac</a>
+        <p class="get-links"><a href="https://github.com/35socks/LiveControl/releases" data-release>Release notes</a> <a href="https://github.com/35socks/LiveControl">Source code</a></p>
+      </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section id="faq" class="section wrap narrow">
-    <h2>Questions</h2>
-    <details><summary>Does it need internet?</summary><p>No. Your devices talk to LiveControl directly over your local Wi-Fi. Nothing leaves your network.</p></details>
-    <details><summary>Which devices can I use?</summary><p>Anything with a modern browser: iPhone, iPad, Android, or another computer. There's nothing to install on them.</p></details>
-    <details><summary>Where are my notes and colours stored?</summary><p>On your Mac, in <code>~/Library/Application Support/LiveControl</code>.</p></details>
-    <details><summary>My phone can't connect.</summary><p>Check that both devices are on the same Wi-Fi network, and that macOS has allowed LiveControl to use the local network when prompted.</p></details>
-    <details><summary>Do I need to install Node.js?</summary><p>Not for the Mac app. It bundles everything it needs.</p></details>
+  <section class="block" id="faq" aria-labelledby="faq-title">
+    <div class="in in-narrow">
+      <div class="block-head">
+        <h2 id="faq-title">Questions</h2>
+      </div>
+      <div class="faq">
+        <details name="faq" id="faq-internet"><summary>Does it need internet?</summary><p>No. Your devices talk to LiveControl directly over your local Wi-Fi. Nothing leaves your network.</p></details>
+        <details name="faq" id="faq-devices"><summary>Which devices can I use?</summary><p>Anything with a modern browser: iPhone, iPad, Android, or another computer. There's nothing to install on them.</p></details>
+        <details name="faq" id="faq-connect"><summary>My phone can't connect.</summary><p>Check that both devices are on the same Wi-Fi network, and that macOS has allowed LiveControl to use the local network when prompted.</p></details>
+        <details name="faq" id="faq-storage"><summary>Where are my notes and colours stored?</summary><p>On your Mac, in <code>~/Library/Application Support/LiveControl</code>.</p></details>
+        <details name="faq" id="faq-node"><summary>Do I need to install Node.js?</summary><p>Not for the Mac app. It bundles everything it needs.</p></details>
+        <details name="faq" id="faq-cost"><summary>What does it cost?</summary><p>Nothing. LiveControl is free and open source, and the code is on GitHub.</p></details>
+      </div>
+    </div>
   </section>
 </main>
 
-<footer class="footer">
-  <div class="wrap foot-inner">
-    <a class="brand" href="#top"><img src="assets/icon.png" alt="" width="24" height="24"> LiveControl</a>
-    <p>Free &amp; open source. Not affiliated with Ableton.</p>
+<footer class="foot">
+  <div class="foot-in">
+    <a class="brand" href="#top"><img src="assets/icon.png" alt="" width="26" height="26">LiveControl</a>
+    <nav class="foot-links" aria-label="Project links">
+      <a href="https://github.com/35socks/LiveControl/releases/download/V2.1.3/LiveControl-V2.1.3.zip" data-download>Download</a>
+      <a href="https://github.com/35socks/LiveControl/releases" data-release>Release notes</a>
+      <a href="https://github.com/35socks/LiveControl">Source code</a>
+    </nav>
+    <p class="foot-note">Free and open source. LiveControl is not affiliated with Ableton.</p>
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script src="demo.js" defer></script>
+<script src="script.js" defer></script>
 </body>
 </html>
