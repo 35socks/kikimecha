@@ -1,175 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>kikimecha</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#0a0d0a;
-    --green:#39ff88;
-    --green-dim:#1c8a4e;
-    --green-faint:#0f3d24;
-  }
-  *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--green);
-    font-family:'JetBrains Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
-    overflow-x:hidden;
-  }
-  a{ color:inherit; }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kikimecha — Independent creative &amp; technical work</title>
+<meta name="description" content="kikimecha — independent software, music, audio engineering and visual work. A launcher for apps, records, video and graphics.">
+<meta name="theme-color" content="#0a0b09">
+<meta name="color-scheme" content="dark">
 
-  /* cute lil glyphs */
-  .glyphs{
-    position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
-  }
-  .glyph{
-    position:absolute;
-    color:var(--green-faint);
-    font-size:1.4rem;
-    user-select:none;
-  }
+<!-- Open Graph / social -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="kikimecha — Independent creative &amp; technical work">
+<meta property="og:description" content="Independent software, music, audio engineering and visual work.">
+<meta property="og:url" content="https://kikimecha.com/">
+<meta property="og:image" content="https://kikimecha.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
 
-  nav{
-    position:relative; z-index:2;
-    display:flex; justify-content:space-between; align-items:center;
-    padding:24px 32px;
-    border-bottom:1px solid var(--green-faint);
-    font-size:0.85rem;
-  }
-  nav .brand{ color:var(--green); font-weight:700; letter-spacing:0.02em; }
-  nav .links{ display:flex; gap:24px; }
-  nav .links a{ text-decoration:none; color:var(--green-dim); transition:color 0.15s ease; }
-  nav .links a:hover{ color:var(--green); }
+<link rel="canonical" href="https://kikimecha.com/">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
 
-  header.hero{
-    position:relative; z-index:2;
-    min-height:82vh; display:flex; flex-direction:column; justify-content:center;
-    padding:40px 32px; max-width:900px; margin:0 auto;
-  }
-  .prompt-line{
-    color:var(--green-dim); font-size:0.95rem; margin-bottom:14px;
-  }
-  .prompt-line .cursor{
-    display:inline-block; width:9px; height:1.1em; background:var(--green);
-    margin-left:4px; vertical-align:text-bottom;
-    animation: blink 1s steps(1) infinite;
-  }
-  @keyframes blink{ 50%{ opacity:0; } }
-
-  h1{
-    font-size:clamp(2.6rem, 8vw, 5.2rem);
-    margin:0; font-weight:700; letter-spacing:-0.01em;
-    text-shadow: 0 0 18px rgba(57,255,136,0.35);
-  }
-  h1 .brk{ color:var(--green-dim); }
-
-  .tagline{
-    margin-top:18px; font-size:1.05rem; color:var(--green-dim);
-    max-width:52ch; line-height:1.6;
-  }
-
-  .hero-links{
-    margin-top:36px; display:flex; gap:14px; flex-wrap:wrap;
-  }
-  .btn{
-    display:inline-block; padding:12px 20px; border:1px solid var(--green-dim);
-    color:var(--green); text-decoration:none; font-size:0.9rem;
-    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-  }
-  .btn:hover{ background:var(--green); color:var(--bg); border-color:var(--green); }
-
-  section{
-    position:relative; z-index:2; max-width:900px; margin:0 auto;
-    padding:60px 32px; border-top:1px solid var(--green-faint);
-  }
-  section h2{
-    font-size:1.1rem; font-weight:700; margin:0 0 20px;
-    color:var(--green);
-  }
-  section h2 .brk{ color:var(--green-dim); font-weight:400; }
-
-  .about p{
-    line-height:1.75; font-size:0.98rem; color:#cdeedd; max-width:64ch;
-    margin:0 0 14px;
-  }
-  .about p .brk{ color:var(--green-dim); }
-
-  footer{
-    position:relative; z-index:2; padding:40px 32px 60px;
-    max-width:900px; margin:0 auto; border-top:1px solid var(--green-faint);
-    display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px;
-    font-size:0.85rem; color:var(--green-dim);
-  }
-  footer .links{ display:flex; gap:20px; }
-  footer .links a{ text-decoration:none; color:var(--green-dim); }
-  footer .links a:hover{ color:var(--green); }
-
-  :focus-visible{ outline:2px solid var(--green); outline-offset:2px; }
-
-  @media (prefers-reduced-motion: reduce){
-    .cursor{ animation:none; opacity:1; }
-  }
-</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "[YOUR NAME]",
+  "alternateName": "kikimecha",
+  "url": "https://kikimecha.com/",
+  "jobTitle": "Developer, musician, audio engineer, visual creative",
+  "sameAs": ["[GITHUB URL]", "[INSTAGRAM URL]", "[BANDCAMP URL]"]
+}
+</script>
 </head>
 <body>
 
-  <div class="glyphs" id="glyphField" aria-hidden="true"></div>
+<a class="skip" href="#launcher">Skip to launcher</a>
 
-  <nav>
-    <span class="brand">kikimecha</span>
-    <div class="links">
-      <a href="#about">about</a>
-      <a href="#contact">contact</a>
+<!-- ══════════════════ HEADER ══════════════════ -->
+<header class="hdr">
+  <div class="wrap hdr__inner">
+    <a class="brand" href="#top" aria-label="kikimecha — home">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4">
+          <path d="M2 3.5h7M2 8h12M2 12.5h5"/>
+        </svg>
+      </span>
+      <span class="brand__name">kikimecha</span>
+      <span class="brand__ver">v2.4</span>
+    </a>
+
+    <nav class="nav" aria-label="Sections">
+      <a href="#dept-software">Software</a>
+      <a href="#dept-music">Music</a>
+      <a href="#dept-visual">Visual</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <div class="hdr__meta">
+      <span class="status" title="Availability">
+        <span class="status__dot" aria-hidden="true"></span>
+        <span class="status__label">Available for work</span>
+      </span>
+      <span class="clock" data-clock aria-hidden="true">—</span>
     </div>
-  </nav>
+  </div>
+</header>
 
-  <header class="hero">
-    <div class="prompt-line">~/kikimecha $ whoami<span class="cursor"></span></div>
-    <h1>kikimecha<span class="brk">_</span></h1>
-    <p class="tagline">hi...</p>
-    <div class="hero-links">
-      <a href="#about" class="btn">./about</a>
-      <a href="#contact" class="btn">./contact</a>
+<main id="top">
+
+  <!-- ══════════════════ HERO ══════════════════ -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="kicker">Independent creative &amp; technical practice</p>
+      <h1>Independent creative<br>and technical work.</h1>
+      <p class="hero__sub">
+        kikimecha is the working name of <span class="ph">[YOUR NAME]</span> — a developer,
+        musician, audio engineer and visual creative. Software built for the studio,
+        records made inside it, and the images that surround them.
+      </p>
+      <ul class="roles" aria-label="Disciplines">
+        <li>Developer</li>
+        <li>Musician</li>
+        <li>Audio engineer</li>
+        <li>Visual creative</li>
+      </ul>
     </div>
-  </header>
+  </section>
 
-  <!-- section id="about" class="about">
-    <h2><span class="brk">//</span> about</h2>
-    <p><span class="brk">[01]</span> noin</p>
-    <p><span class="brk">[02]</span> tracks start as feedback loops and get compiled down into something you can actually listen to.</p>
-    <p><span class="brk">[03]</span> releases aren't up yet — check back soon.</p>
-  </section> -->
-
-  <footer id="contact">
-    <div>kikimecha</div>
-    <div class="links">
-      <a href="https://instagram.com/kikimecha">instagram</a>
-      <a href="https://kikimecha.bandcamp.com">bandcamp</a>
-      <a href="mailto:kikimecha@proton.me">email</a>
+  <!-- ══════════════════ SYSTEM BAR ══════════════════ -->
+  <div class="sysbar">
+    <div class="wrap sysbar__inner">
+      <span>launcher</span>
+      <span>10 entries</span>
+      <span>4 departments</span>
+      <span class="sysbar__end">build 2.4.1 · <span data-clock>—</span></span>
     </div>
-  </footer>
+  </div>
 
-<script>
-  const chars = ['[',']','(',')','{','}','./','\\\\','[]','()','{}','/>','<-'];
-  const field = document.getElementById('glyphField');
-  const count = window.innerWidth < 700 ? 18 : 34;
-  for (let i = 0; i < count; i++) {
-    const g = document.createElement('div');
-    g.className = 'glyph';
-    g.textContent = chars[Math.floor(Math.random() * chars.length)];
-    g.style.left = Math.random() * 100 + 'vw';
-    g.style.top = Math.random() * 100 + 'vh';
-    g.style.fontSize = (0.9 + Math.random() * 1.4) + 'rem';
-    g.style.opacity = (0.25 + Math.random() * 0.5).toFixed(2);
-    field.appendChild(g);
-  }
-</script>
+  <!-- ══════════════════ LAUNCHER (rendered by app.js) ══════════════════ -->
+  <section class="launcher" id="launcher" aria-label="Project launcher">
+    <div class="wrap" id="launcher-root"></div>
+  </section>
 
+  <!-- ══════════════════ ABOUT / CONTACT ══════════════════ -->
+  <section class="about" id="about">
+    <div class="wrap">
+      <div class="dept__head">
+        <span class="dept__num">05</span>
+        <h2 class="dept__title">About &amp; contact</h2>
+        <span class="dept__rule" aria-hidden="true"></span>
+        <span class="dept__count">AB-01</span>
+      </div>
+
+      <div class="about__grid">
+        <div class="about__col">
+          <p class="txt">
+            kikimecha brings together independent software, music, audio engineering and
+            visual projects under one practice — tools for making records, records made
+            with them, and the video and graphics that carry both.
+          </p>
+          <p class="txt">
+            <span class="ph">[PLACEHOLDER — two or three sentences of biography: where you are based,
+            how you work, and what you are currently focused on.]</span>
+          </p>
+          <div class="btns" style="margin-top:22px">
+            <button class="btn" data-open="about" aria-haspopup="dialog">
+              <span>Open about window</span><span class="btn__i" aria-hidden="true">↗</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="about__col">
+          <dl class="kv">
+            <div class="kv__row"><dt>Based</dt><dd>Glasgow, UK</dd></div>
+            <div class="kv__row"><dt>Disciplines</dt><dd>Software · Music · Audio · Visual</dd></div>
+            <div class="kv__row"><dt>Tools</dt><dd><span class="ph">[DAW]</span> · <span class="ph">[EDITOR]</span> · <span class="ph">[STACK]</span></dd></div>
+            <div class="kv__row"><dt>Email</dt><dd><a href="#" data-placeholder-link title="Replace this URL in app.js / index.html">[EMAIL ADDRESS]</a></dd></div>
+            <div class="kv__row"><dt>GitHub</dt><dd><a href="#" data-placeholder-link title="Replace this URL in app.js / index.html">[GITHUB URL]</a></dd></div>
+            <div class="kv__row"><dt>Elsewhere</dt><dd><a href="#" data-placeholder-link>[INSTAGRAM]</a> · <a href="#" data-placeholder-link>[BANDCAMP]</a></dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer class="ftr">
+  <div class="wrap ftr__inner">
+    <span>© <span id="year">2026</span> kikimecha</span>
+    <span class="ftr__links">
+      <a href="#" data-placeholder-link>GitHub</a>
+      <a href="#" data-placeholder-link>Email</a>
+      <a href="#" data-placeholder-link>Instagram</a>
+    </span>
+    <span class="ftr__build">HTML · CSS · JS — no frameworks</span>
+  </div>
+</footer>
+
+<!-- ══════════════════ WINDOW SYSTEM ══════════════════ -->
+<div class="backdrop" id="backdrop" hidden></div>
+<div class="win-layer" id="window-layer"></div>
+<div class="taskbar" id="taskbar" hidden>
+  <div class="taskbar__inner" id="tasks" role="toolbar" aria-label="Open windows"></div>
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
