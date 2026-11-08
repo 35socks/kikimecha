@@ -1,170 +1,999 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>kikimecha — Independent creative &amp; technical work</title>
-<meta name="description" content="kikimecha — independent software, music, audio engineering and visual work. A launcher for apps, records, video and graphics.">
-<meta name="theme-color" content="#0a0b09">
-<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#11120f">
+<title>kikimecha — Creative Systems</title>
 
-<!-- Open Graph / social -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="kikimecha — Independent creative &amp; technical work">
-<meta property="og:description" content="Independent software, music, audio engineering and visual work.">
-<meta property="og:url" content="https://kikimecha.com/">
-<meta property="og:image" content="https://kikimecha.com/assets/img/og.png">
-<meta name="twitter:card" content="summary_large_image">
-
-<link rel="canonical" href="https://kikimecha.com/">
-<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="styles.css">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "[YOUR NAME]",
-  "alternateName": "kikimecha",
-  "url": "https://kikimecha.com/",
-  "jobTitle": "Developer, musician, audio engineer, visual creative",
-  "sameAs": ["[GITHUB URL]", "[INSTAGRAM URL]", "[BANDCAMP URL]"]
+<style>
+:root {
+  --bg: #11120f;
+  --surface: #191b17;
+  --surface2: #20231e;
+  --surface3: #292d25;
+  --border: #34382f;
+  --text: #e9eae3;
+  --muted: #898e82;
+  --accent: #c8ee78;
+  --mono: "SFMono-Regular", Consolas, monospace;
+  --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
-</script>
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  min-height: 100vh;
+  font-size: 13px;
+}
+
+button { font: inherit; color: inherit; }
+
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.app {
+  max-width: 1320px;
+  margin: auto;
+  padding: 0 48px;
+}
+
+/* TOP BAR */
+
+header {
+  height: 68px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: .13em;
+}
+
+.brand-mark {
+  width: 29px;
+  height: 29px;
+  background: var(--accent);
+  color: #171a12;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-family: var(--mono);
+  border-radius: 3px;
+  font-size: 17px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  color: var(--muted);
+  font: 10px var(--mono);
+  letter-spacing: .08em;
+}
+
+.online {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.online::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* INTRO */
+
+.hero {
+  padding: 88px 0 65px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 30px;
+}
+
+.eyebrow {
+  color: var(--accent);
+  font: 10px var(--mono);
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  margin-bottom: 23px;
+}
+
+h1 {
+  font-size: clamp(44px, 7vw, 82px);
+  font-weight: 550;
+  letter-spacing: -.075em;
+  line-height: .98;
+  margin: 0;
+}
+
+.hero-description {
+  color: #a4a99d;
+  font-size: 14px;
+  line-height: 1.8;
+  max-width: 490px;
+  margin-top: 25px;
+}
+
+.hero-meta {
+  color: var(--muted);
+  font: 10px/2 var(--mono);
+  text-align: right;
+  white-space: nowrap;
+  padding-bottom: 5px;
+}
+
+/* SECTION HEADINGS */
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 0 15px;
+  border-top: 1px solid var(--border);
+}
+
+.section-name {
+  color: var(--muted);
+  font: 10px var(--mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.section-name strong {
+  color: var(--text);
+  margin-right: 12px;
+  font-weight: 500;
+}
+
+.section-info {
+  color: #656b60;
+  font: 9px var(--mono);
+  letter-spacing: .08em;
+}
+
+/* APPLICATION GRID */
+
+.launcher {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 11px;
+}
+
+.application {
+  min-height: 205px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 19px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  transition: .2s ease;
+}
+
+.application:hover {
+  background: var(--surface2);
+  border-color: #687254;
+  transform: translateY(-3px);
+}
+
+.application-icon {
+  width: 39px;
+  height: 39px;
+  border: 1px solid #41483a;
+  border-radius: 4px;
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+}
+
+.application-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.application-arrow {
+  position: absolute;
+  right: 18px;
+  top: 17px;
+  color: var(--muted);
+  font: 16px var(--mono);
+}
+
+.application h2 {
+  font-size: 19px;
+  font-weight: 550;
+  letter-spacing: -.045em;
+  margin: 0 0 8px;
+}
+
+.application p {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.application-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 22px;
+  color: var(--muted);
+  font: 9px var(--mono);
+  text-transform: uppercase;
+}
+
+.status {
+  color: var(--accent);
+}
+
+/* FEATURED PROJECT */
+
+.featured {
+  margin-top: 11px;
+  width: 100%;
+  min-height: 230px;
+  background: linear-gradient(110deg, #22271d, #171a15 75%);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 28px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: .2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.featured:hover {
+  border-color: #75825b;
+  background: linear-gradient(110deg, #292f22, #1b1e18 75%);
+}
+
+.featured::after {
+  content: "NF";
+  position: absolute;
+  right: 30px;
+  top: 5px;
+  font-size: clamp(100px, 18vw, 210px);
+  font-weight: 800;
+  letter-spacing: -.12em;
+  color: rgba(255,255,255,.025);
+  pointer-events: none;
+}
+
+.featured-label {
+  color: var(--accent);
+  font: 10px var(--mono);
+  text-transform: uppercase;
+  letter-spacing: .13em;
+}
+
+.featured h2 {
+  font-size: clamp(30px, 5vw, 48px);
+  letter-spacing: -.065em;
+  font-weight: 550;
+  margin: 0 0 9px;
+}
+
+.featured p {
+  max-width: 520px;
+  color: #a4aa9b;
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.featured-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--muted);
+  font: 9px var(--mono);
+  text-transform: uppercase;
+  margin-top: 30px;
+}
+
+/* ABOUT */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.3fr .7fr;
+  gap: 11px;
+  margin: 11px 0 75px;
+}
+
+.about-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 23px;
+  border-radius: 4px;
+}
+
+.about-panel h3 {
+  color: var(--muted);
+  font: 10px var(--mono);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  margin: 0 0 16px;
+}
+
+.about-panel p {
+  color: #a4aa9d;
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.contact-links a {
+  padding: 8px 11px;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font: 9px var(--mono);
+  text-decoration: none;
+}
+
+.contact-links a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* FOOTER */
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 22px 0 30px;
+  display: flex;
+  justify-content: space-between;
+  color: #62685d;
+  font: 9px var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* WINDOW SYSTEM */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0,0,0,.76);
+  backdrop-filter: blur(9px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+}
+
+.overlay.open {
+  display: flex;
+  animation: fade .2s ease;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.window {
+  width: min(850px, 100%);
+  max-height: 88vh;
+  background: #171915;
+  border: 1px solid #444b3d;
+  border-radius: 5px;
+  box-shadow: 0 30px 100px #000a;
+  display: flex;
+  flex-direction: column;
+  animation: enter .22s ease;
+  overflow: hidden;
+}
+
+@keyframes enter {
+  from { opacity: 0; transform: translateY(12px) scale(.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.window-bar {
+  height: 44px;
+  min-height: 44px;
+  background: #20231e;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+}
+
+.window-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 10px var(--mono);
+  color: #c6cbbf;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.window-dot {
+  height: 7px;
+  width: 7px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.close {
+  border: 1px solid transparent;
+  background: none;
+  color: var(--muted);
+  width: 27px;
+  height: 27px;
+  font-size: 19px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.close:hover {
+  background: var(--surface3);
+  color: white;
+}
+
+.window-content {
+  overflow-y: auto;
+  padding: 38px;
+}
+
+.modal-label {
+  color: var(--accent);
+  font: 10px var(--mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.modal-title {
+  font-size: clamp(34px, 6vw, 55px);
+  letter-spacing: -.07em;
+  line-height: 1;
+  font-weight: 550;
+  margin: 0 0 17px;
+}
+
+.modal-description {
+  color: #abb0a5;
+  font-size: 14px;
+  line-height: 1.8;
+  max-width: 650px;
+}
+
+.modal-section {
+  border-top: 1px solid var(--border);
+  margin-top: 30px;
+  padding-top: 23px;
+}
+
+.modal-section h3 {
+  color: var(--muted);
+  font: 10px var(--mono);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  margin: 0 0 16px;
+}
+
+.modal-section p {
+  color: #a9aea3;
+  font-size: 12px;
+  line-height: 1.9;
+  margin: 0;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.detail {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 16px;
+}
+
+.detail-label {
+  color: var(--muted);
+  font: 9px var(--mono);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.detail-value {
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.feature-list {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 8px;
+}
+
+.feature {
+  border: 1px solid var(--border);
+  padding: 12px;
+  color: #c6cbbf;
+  font-size: 11px;
+}
+
+.feature::before {
+  content: "↳ ";
+  color: var(--accent);
+  font-family: var(--mono);
+}
+
+.modal-links {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-top: 27px;
+}
+
+.modal-link {
+  display: inline-block;
+  padding: 11px 15px;
+  background: var(--accent);
+  color: #171a12;
+  text-decoration: none;
+  font: 10px var(--mono);
+  text-transform: uppercase;
+  border: 1px solid var(--accent);
+}
+
+.modal-link.secondary {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.modal-link:hover { opacity: .8; }
+
+.placeholder {
+  color: #747c6b;
+  font: 10px/1.7 var(--mono);
+  margin-top: 24px;
+}
+
+@media(max-width:900px) {
+  .launcher { grid-template-columns: repeat(2,1fr); }
+}
+
+@media(max-width:600px) {
+  .app { padding: 0 19px; }
+  .hero { padding: 58px 0 45px; }
+  .hero-meta { display: none; }
+  h1 { font-size: 51px; }
+  .header-right .top-meta { display: none; }
+  .launcher { grid-template-columns: repeat(2,1fr); }
+  .application { min-height: 180px; padding: 14px; }
+  .application h2 { font-size: 17px; }
+  .application-footer { font-size: 8px; }
+  .about-grid { grid-template-columns: 1fr; }
+  .window-content { padding: 24px 19px; }
+  .details { grid-template-columns: 1fr; }
+  .feature-list { grid-template-columns: 1fr; }
+  .overlay { padding: 9px; align-items: flex-end; }
+  .window { max-height: 91vh; }
+  footer { flex-direction: column; gap: 10px; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
 </head>
+
 <body>
+<div class="app">
 
-<a class="skip" href="#launcher">Skip to launcher</a>
-
-<!-- ══════════════════ HEADER ══════════════════ -->
-<header class="hdr">
-  <div class="wrap hdr__inner">
-    <a class="brand" href="#top" aria-label="kikimecha — home">
-      <span class="brand__mark" aria-hidden="true">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4">
-          <path d="M2 3.5h7M2 8h12M2 12.5h5"/>
-        </svg>
-      </span>
-      <span class="brand__name">kikimecha</span>
-      <span class="brand__ver">v2.4</span>
-    </a>
-
-    <nav class="nav" aria-label="Sections">
-      <a href="#dept-software">Software</a>
-      <a href="#dept-music">Music</a>
-      <a href="#dept-visual">Visual</a>
-      <a href="#about">About</a>
-    </nav>
-
-    <div class="hdr__meta">
-      <span class="status" title="Availability">
-        <span class="status__dot" aria-hidden="true"></span>
-        <span class="status__label">Available for work</span>
-      </span>
-      <span class="clock" data-clock aria-hidden="true">—</span>
-    </div>
+<header>
+  <div class="brand">
+    <div class="brand-mark">k.</div>
+    KIKIMECHA
+  </div>
+  <div class="header-right">
+    <span class="top-meta">CREATIVE / TECHNICAL WORKSPACE</span>
+    <span class="online">SYSTEM ONLINE</span>
   </div>
 </header>
 
-<main id="top">
+<main>
 
-  <!-- ══════════════════ HERO ══════════════════ -->
-  <section class="hero">
-    <div class="wrap">
-      <p class="kicker">Independent creative &amp; technical practice</p>
-      <h1>Independent creative<br>and technical work.</h1>
-      <p class="hero__sub">
-        kikimecha is the working name of <span class="ph">[YOUR NAME]</span> — a developer,
-        musician, audio engineer and visual creative. Software built for the studio,
-        records made inside it, and the images that surround them.
-      </p>
-      <ul class="roles" aria-label="Disciplines">
-        <li>Developer</li>
-        <li>Musician</li>
-        <li>Audio engineer</li>
-        <li>Visual creative</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ══════════════════ SYSTEM BAR ══════════════════ -->
-  <div class="sysbar">
-    <div class="wrap sysbar__inner">
-      <span>launcher</span>
-      <span>10 entries</span>
-      <span>4 departments</span>
-      <span class="sysbar__end">build 2.4.1 · <span data-clock>—</span></span>
-    </div>
+<section class="hero">
+  <div>
+    <div class="eyebrow">INDEPENDENT CREATIVE / 2026</div>
+    <h1>Ideas into<br>something real.</h1>
+    <p class="hero-description">
+      An independent collection of software, music, audio engineering
+      and visual projects by Cameron Bell.
+      Different disciplines. One workspace.
+    </p>
   </div>
-
-  <!-- ══════════════════ LAUNCHER (rendered by app.js) ══════════════════ -->
-  <section class="launcher" id="launcher" aria-label="Project launcher">
-    <div class="wrap" id="launcher-root"></div>
-  </section>
-
-  <!-- ══════════════════ ABOUT / CONTACT ══════════════════ -->
-  <section class="about" id="about">
-    <div class="wrap">
-      <div class="dept__head">
-        <span class="dept__num">05</span>
-        <h2 class="dept__title">About &amp; contact</h2>
-        <span class="dept__rule" aria-hidden="true"></span>
-        <span class="dept__count">AB-01</span>
-      </div>
-
-      <div class="about__grid">
-        <div class="about__col">
-          <p class="txt">
-            kikimecha brings together independent software, music, audio engineering and
-            visual projects under one practice — tools for making records, records made
-            with them, and the video and graphics that carry both.
-          </p>
-          <p class="txt">
-            <span class="ph">[PLACEHOLDER — two or three sentences of biography: where you are based,
-            how you work, and what you are currently focused on.]</span>
-          </p>
-          <div class="btns" style="margin-top:22px">
-            <button class="btn" data-open="about" aria-haspopup="dialog">
-              <span>Open about window</span><span class="btn__i" aria-hidden="true">↗</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="about__col">
-          <dl class="kv">
-            <div class="kv__row"><dt>Based</dt><dd>Glasgow, UK</dd></div>
-            <div class="kv__row"><dt>Disciplines</dt><dd>Software · Music · Audio · Visual</dd></div>
-            <div class="kv__row"><dt>Tools</dt><dd><span class="ph">[DAW]</span> · <span class="ph">[EDITOR]</span> · <span class="ph">[STACK]</span></dd></div>
-            <div class="kv__row"><dt>Email</dt><dd><a href="#" data-placeholder-link title="Replace this URL in app.js / index.html">[EMAIL ADDRESS]</a></dd></div>
-            <div class="kv__row"><dt>GitHub</dt><dd><a href="#" data-placeholder-link title="Replace this URL in app.js / index.html">[GITHUB URL]</a></dd></div>
-            <div class="kv__row"><dt>Elsewhere</dt><dd><a href="#" data-placeholder-link>[INSTAGRAM]</a> · <a href="#" data-placeholder-link>[BANDCAMP]</a></dd></div>
-          </dl>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<!-- ══════════════════ FOOTER ══════════════════ -->
-<footer class="ftr">
-  <div class="wrap ftr__inner">
-    <span>© <span id="year">2026</span> kikimecha</span>
-    <span class="ftr__links">
-      <a href="#" data-placeholder-link>GitHub</a>
-      <a href="#" data-placeholder-link>Email</a>
-      <a href="#" data-placeholder-link>Instagram</a>
-    </span>
-    <span class="ftr__build">HTML · CSS · JS — no frameworks</span>
+  <div class="hero-meta">
+    KIKIMECHA.COM<br>
+    AYR / SCOTLAND<br>
+    EST. 2026
   </div>
-</footer>
+</section>
 
-<!-- ══════════════════ WINDOW SYSTEM ══════════════════ -->
-<div class="backdrop" id="backdrop" hidden></div>
-<div class="win-layer" id="window-layer"></div>
-<div class="taskbar" id="taskbar" hidden>
-  <div class="taskbar__inner" id="tasks" role="toolbar" aria-label="Open windows"></div>
+<div class="section-header">
+  <div class="section-name"><strong>01</strong> SOFTWARE / APPLICATIONS</div>
+  <div class="section-info">02 PROJECTS</div>
 </div>
 
-<script src="app.js"></script>
+<section class="launcher">
+
+<button class="application" onclick="openWindow('livecontrol')">
+  <div class="application-icon">
+    <svg viewBox="0 0 24 24"><path d="M4 18V6m5 12V9m5 9V4m5 14v-7"/><path d="M2 18h20"/></svg>
+  </div>
+  <span class="application-arrow">↗</span>
+  <div>
+    <h2>LiveControl</h2>
+    <p>Live performance and playback control software.</p>
+    <div class="application-footer">
+      <span class="status">IN DEVELOPMENT</span>
+      <span>APP / 001</span>
+    </div>
+  </div>
+</button>
+
+<button class="application" onclick="openWindow('samplevault')">
+  <div class="application-icon">
+    <svg viewBox="0 0 24 24"><path d="M4 5h16v15H4z"/><path d="M4 9h16M8 5v4m4-4v4m-4 4h8m-8 3h5"/></svg>
+  </div>
+  <span class="application-arrow">↗</span>
+  <div>
+    <h2>SampleVault</h2>
+    <p>Sample library organisation and audio management.</p>
+    <div class="application-footer">
+      <span class="status">IN DEVELOPMENT</span>
+      <span>APP / 002</span>
+    </div>
+  </div>
+</button>
+
+<button class="application" onclick="openWindow('music')">
+  <div class="application-icon">
+    <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+  </div>
+  <span class="application-arrow">↗</span>
+  <div>
+    <h2>Music</h2>
+    <p>Writing, recording, production, mixing and mastering.</p>
+    <div class="application-footer">
+      <span>SELECTED WORK</span>
+      <span>AUDIO / 003</span>
+    </div>
+  </div>
+</button>
+
+<button class="application" onclick="openWindow('visual')">
+  <div class="application-icon">
+    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="m3 15 5-5 4 4 3-3 6 6"/><circle cx="9" cy="8" r="1.5"/></svg>
+  </div>
+  <span class="application-arrow">↗</span>
+  <div>
+    <h2>Video & Graphics</h2>
+    <p>Moving image, graphic design and visual production.</p>
+    <div class="application-footer">
+      <span>SELECTED WORK</span>
+      <span>VISUAL / 004</span>
+    </div>
+  </div>
+</button>
+
+</section>
+
+<div class="section-header">
+  <div class="section-name"><strong>02</strong> FEATURED / COLLABORATIONS</div>
+  <div class="section-info">01 PROJECT</div>
+</div>
+
+<button class="featured" onclick="openWindow('noisy')">
+  <div class="featured-label">GLASGOW / MUSIC / VIDEO</div>
+  <div>
+    <h2>Noisy Flatmate</h2>
+    <p>
+      A music project showcasing bands performing in a flat.
+      Audio and video production, alongside the premiere of the
+      first episode.
+    </p>
+  </div>
+  <div class="featured-bottom">
+    <span>FEATURED CASE STUDY</span>
+    <span>EXPLORE PROJECT ↗</span>
+  </div>
+</button>
+
+<div class="section-header">
+  <div class="section-name"><strong>03</strong> INFORMATION</div>
+  <div class="section-info">ABOUT / CONTACT</div>
+</div>
+
+<section class="about-grid">
+  <div class="about-panel">
+    <h3>About kikimecha</h3>
+    <p>
+      Kikimecha is an independent creative and technical workspace
+      bringing together software development, music, audio engineering
+      and visual production. A home for experiments, collaborations
+      and finished projects.
+    </p>
+  </div>
+  <div class="about-panel">
+    <h3>Connect</h3>
+    <p>For collaborations, enquiries or interesting projects.</p>
+    <div class="contact-links">
+      <a href="mailto:YOUR_EMAIL_HERE">EMAIL ↗</a>
+      <a href="https://github.com/YOUR_USERNAME" target="_blank">GITHUB ↗</a>
+      <a href="https://instagram.com/YOUR_USERNAME" target="_blank">INSTAGRAM ↗</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>© KIKIMECHA 2026</span>
+  <span>INDEPENDENT BY DESIGN</span>
+  <span>AYR / SCOTLAND</span>
+</footer>
+
+</div>
+
+<!-- REUSABLE PROJECT WINDOW -->
+
+<div class="overlay" id="overlay" onclick="outsideClose(event)">
+  <section class="window" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="window-bar">
+      <div class="window-name">
+        <span class="window-dot"></span>
+        <span id="windowCaption">PROJECT VIEWER</span>
+      </div>
+      <button class="close" onclick="closeWindow()" aria-label="Close window">×</button>
+    </div>
+    <div class="window-content" id="windowContent"></div>
+  </section>
+</div>
+
+<script>
+const projects = {
+
+livecontrol: {
+  caption: "APPLICATION / 001",
+  label: "SOFTWARE / LIVE PERFORMANCE",
+  title: "LiveControl",
+  description: "A live performance and playback control application designed around the practical requirements of musicians and playback operators.",
+  details: [
+    ["CATEGORY","Software / Live performance"],
+    ["STATUS","In development"],
+    ["PURPOSE","Live playback and show control"],
+    ["DEVELOPMENT","Independent project"]
+  ],
+  overview: "LiveControl is being developed to provide a dedicated environment for managing live performance playback. This is where the project's design decisions, development progress and technical details can be explored.",
+  features: [
+    "Live playback workflow",
+    "Show control interface",
+    "Performance-oriented design",
+    "Project development and updates"
+  ],
+  note: "Add application screenshots, confirmed features, technology stack and release information here.",
+  links: [
+    ["GITHUB REPOSITORY","https://github.com/YOUR_USERNAME/LiveControl"]
+  ]
+},
+
+samplevault: {
+  caption: "APPLICATION / 002",
+  label: "SOFTWARE / AUDIO",
+  title: "SampleVault",
+  description: "A software project focused on sample libraries and audio asset organisation.",
+  details: [
+    ["CATEGORY","Software / Audio"],
+    ["STATUS","In development"],
+    ["PURPOSE","Sample management"],
+    ["DEVELOPMENT","Independent project"]
+  ],
+  overview: "SampleVault is a project exploring a dedicated way to organise and work with audio samples. This section will document its development, interface and capabilities.",
+  features: [
+    "Audio sample organisation",
+    "Library management",
+    "Creative audio workflow",
+    "Development updates"
+  ],
+  note: "Add real screenshots, confirmed functionality, supported formats and technology information.",
+  links: [
+    ["GITHUB REPOSITORY","https://github.com/YOUR_USERNAME/SampleVault"]
+  ]
+},
+
+music: {
+  caption: "DEPARTMENT / 003",
+  label: "MUSIC / AUDIO ENGINEERING",
+  title: "Music",
+  description: "Original music, songwriting, production and audio engineering. A collection of creative work and collaborations.",
+  details: [
+    ["DISCIPLINES","Writing / Production"],
+    ["ENGINEERING","Mixing / Mastering"],
+    ["WORK","Original projects and collaborations"],
+    ["FORMAT","Releases / Audio examples"]
+  ],
+  overview: "Music is a central part of my creative work. This department brings together songwriting, recording, production, mixing and mastering across different projects.",
+  features: [
+    "Songwriting and composition",
+    "Recording and production",
+    "Audio mixing",
+    "Audio mastering"
+  ],
+  note: "Individual releases should eventually have their own artwork, embedded players, credits and project descriptions."
+},
+
+visual: {
+  caption: "DEPARTMENT / 004",
+  label: "VISUAL / CREATIVE PRODUCTION",
+  title: "Video & Graphics",
+  description: "Visual production across music, independent projects and creative collaborations.",
+  details: [
+    ["DISCIPLINES","Video / Graphics"],
+    ["PRODUCTION","Filming / Editing"],
+    ["DESIGN","Artwork / Promotional"],
+    ["FORMAT","Selected projects"]
+  ],
+  overview: "A collection of moving image, graphic design and visual production. Each project can be explored through its own case study, with visual material and a breakdown of my contribution.",
+  features: [
+    "Video production",
+    "Video editing",
+    "Graphic design",
+    "Music-related visuals"
+  ],
+  note: "Add project stills, video embeds, artwork and individual case studies."
+},
+
+noisy: {
+  caption: "FEATURED PROJECT / 005",
+  label: "COLLABORATION / GLASGOW",
+  title: "Noisy Flatmate",
+  description: "Noisy Flatmate is a Glasgow-based music project showcasing bands performing in a flat. An intimate setting for live music and independent artists.",
+  details: [
+    ["PROJECT","Music performance series"],
+    ["LOCATION","Glasgow, Scotland"],
+    ["MY ROLE","Audio and video production"],
+    ["MILESTONE","Premiere of episode one"]
+  ],
+  overview: "Noisy Flatmate brings bands into a flat to showcase their music in a more intimate environment. I have contributed audio and video work to the project and helped host the premiere of its first episode.",
+  features: [
+    "Audio production",
+    "Video production",
+    "Episode one premiere",
+    "Independent music collaboration"
+  ],
+  note: "Add the first episode, premiere photography, production stills, credits and links to the project."
+}
+
+};
+
+const overlay = document.getElementById("overlay");
+const content = document.getElementById("windowContent");
+const caption = document.getElementById("windowCaption");
+let previousFocus = null;
+
+function openWindow(id) {
+  const p = projects[id];
+  if (!p) return;
+
+  previousFocus = document.activeElement;
+  caption.textContent = p.caption;
+
+  const details = p.details.map(d => `
+    <div class="detail">
+      <div class="detail-label">${d[0]}</div>
+      <div class="detail-value">${d[1]}</div>
+    </div>
+  `).join("");
+
+  const features = p.features.map(f => `
+    <div class="feature">${f}</div>
+  `).join("");
+
+  const links = (p.links || []).map(l => `
+    <a class="modal-link secondary" href="${l[1]}" target="_blank" rel="noopener noreferrer">${l[0]} ↗</a>
+  `).join("");
+
+  content.innerHTML = `
+    <div class="modal-label">${p.label}</div>
+    <h2 class="modal-title" id="modalTitle">${p.title}</h2>
+    <div class="modal-description">${p.description}</div>
+
+    <div class="details">${details}</div>
+
+    <div class="modal-section">
+      <h3>Project overview</h3>
+      <p>${p.overview}</p>
+    </div>
+
+    <div class="modal-section">
+      <h3>Areas of work</h3>
+      <div class="feature-list">${features}</div>
+    </div>
+
+    ${links ? `<div class="modal-links">${links}</div>` : ""}
+
+    <div class="placeholder">${p.note}</div>
+  `;
+
+  overlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+  document.querySelector(".close").focus();
+}
+
+function closeWindow() {
+  overlay.classList.remove("open");
+  document.body.style.overflow = "";
+  if (previousFocus) previousFocus.focus();
+}
+
+function outsideClose(event) {
+  if (event.target === overlay) closeWindow();
+}
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && overlay.classList.contains("open")) {
+    closeWindow();
+  }
+});
+</script>
+
 </body>
 </html>
